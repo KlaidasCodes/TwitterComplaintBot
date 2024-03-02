@@ -38,9 +38,10 @@ class InternetSpeedTwitterBot:
                                                                     "/div[3]/div[1]/a/span[4]")
         self.start_test_button.click()
         time.sleep(45)
-        self.down_speed = self.driver.find_element(By.CLASS_NAME, "download-speed").text
-        self.upload_speed = self.driver.find_element(By.CLASS_NAME, "upload-speed").text
+        self.down_speed = float(self.driver.find_element(By.CLASS_NAME, "download-speed").text)
+        self.upload_speed = float(self.driver.find_element(By.CLASS_NAME, "upload-speed").text)
         print(f"Down speed - {self.down_speed}\nUp speed - {self.upload_speed}")
+        self.driver.quit()
 
     def tweet_at_provider(self):
         self.twitter_driver = webdriver.Chrome(options=self.driver_options)
@@ -85,6 +86,8 @@ class InternetSpeedTwitterBot:
                                                                                    "/div[1]/div/div/div/div[2]/div[2]"
                                                                                    "/div/div/div/div[4]")
         self.status_submitting_button.click()
+        time.sleep(2)
+        self.twitter_driver.quit()
 
 
 
